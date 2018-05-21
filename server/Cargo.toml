@@ -4,6 +4,4 @@ version = "0.1.0"
 authors = ["Alberto Leal <mailforalberto@gmail.com>"]
 
 [dependencies]
-futures = "0.1.14"
-hyper = "0.11.27"
-num_cpus = "1.8.0"
+hyper = { git = "https://github.com/hyperium/hyper", rev = "b5a888b0dfb4d6657e00a662257b571d56bda2e7" }
