@@ -1,5 +1,6 @@
 extern crate futures;
 extern crate hyper;
+extern crate num_cpus;
 
 // 3rd-party imports
 
@@ -32,6 +33,18 @@ impl Service for Middleware {
 // app
 
 fn main() {
+    let num_of_cpus = {
+        let num_cpus = num_cpus::get();
+
+        if num_cpus <= 1 {
+            1
+        } else {
+            num_cpus - 1
+        }
+    };
+
+    println!("Number of CPUs server will use: {}", num_of_cpus);
+
     let server_address = "0.0.0.0:7777".parse().unwrap();
 
     let server = Http::new()
