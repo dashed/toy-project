@@ -20,8 +20,8 @@ fn main() {
     // to handle requests for that specific connection.
     let new_service = || {
         // This is the `Service` that will handle the connection.
-        // `service_fn_ok` is a helper to convert a function that
-        // returns a Response into a `Service`.
+        // `service_fn_ok` is a helper to convert a function, that
+        // returns a Response, into a `Service`.
         service_fn_ok(|_| {
             Response::new(Body::from(PHRASE))
         })
