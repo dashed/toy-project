@@ -31,7 +31,10 @@ fn main() {
 
     let server = Server::bind(&server_address)
         .serve(new_service)
-        .map_err(|e| eprintln!("server error: {}", e));
+        .map_err(|e| {
+            // TODO: error logging to a service
+            eprintln!("server error: {}", e)
+        });
 
     println!("Listening on http://{}", server_address);
 
