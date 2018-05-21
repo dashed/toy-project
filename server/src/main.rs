@@ -2,9 +2,9 @@ extern crate hyper;
 
 // 3rd-party imports
 
-use hyper::{Body, Response, Server};
-use hyper::service::service_fn_ok;
 use hyper::rt::{self, Future};
+use hyper::service::service_fn_ok;
+use hyper::{Body, Response, Server, StatusCode};
 
 // service
 
@@ -13,7 +13,6 @@ const PHRASE: &'static str = "Hello, World!";
 // app
 
 fn main() {
-
     let server_address = "0.0.0.0:7777".parse().unwrap();
 
     // new_service is run for each connection, creating a 'service'
@@ -23,7 +22,10 @@ fn main() {
         // `service_fn_ok` is a helper to convert a function, that
         // returns a Response, into a `Service`.
         service_fn_ok(|_| {
-            Response::new(Body::from(PHRASE))
+            Response::builder()
+                .status(StatusCode::NOT_FOUND)
+                .body(Body::from(PHRASE))
+                .unwrap()
         })
     };
 
