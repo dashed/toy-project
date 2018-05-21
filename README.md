@@ -8,6 +8,7 @@ toy-project
 ```sh
 cargo run
 cargo check
+cargo fmt
 ```
 
 License
