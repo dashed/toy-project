@@ -4,7 +4,7 @@ extern crate hyper;
 
 use hyper::rt::{self, Future};
 use hyper::service::service_fn_ok;
-use hyper::{Body, Response, Server, StatusCode};
+use hyper::{Body, Request, Response, Server, StatusCode};
 
 // service
 
@@ -21,7 +21,9 @@ fn main() {
         // This is the `Service` that will handle the connection.
         // `service_fn_ok` is a helper to convert a function, that
         // returns a Response, into a `Service`.
-        service_fn_ok(|_| {
+        service_fn_ok(|request: Request<Body>| {
+            println!("request: {} {}", request.method(), request.uri());
+
             Response::builder()
                 .status(StatusCode::NOT_FOUND)
                 .body(Body::from(PHRASE))
