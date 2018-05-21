@@ -32,10 +32,10 @@ impl Service for Middleware {
 // app
 
 fn main() {
-    let addr = "0.0.0.0:7777".parse().unwrap();
+    let server_address = "0.0.0.0:7777".parse().unwrap();
 
     let server = Http::new()
-        .bind(&addr, || {
+        .bind(&server_address, || {
             let middleware = Middleware;
             Ok(middleware)
         })
